@@ -1,0 +1,18 @@
+<nav class="bottom-nav">
+    <a href="{% url 'home' %}" class="nav-item {% if request.path == '/' %}active{% endif %}">
+        <i class="fas fa-home"></i>
+        <span>Главная</span>
+    </a>
+    <a href="{% url 'upload_tree' %}" class="nav-item {% if request.path == '/upload/' %}active{% endif %}">
+        <i class="fas fa-camera"></i>
+        <span>Загрузить</span>
+    </a>
+    <a href="{% url 'about' %}" class="nav-item {% if request.path == '/about/' %}active{% endif %}">
+        <i class="fas fa-question"></i>
+        <span>О проекте</span>
+    </a>
+    <a href="{% url 'profile' %}" class="nav-item {% if request.path == '/profile/' %}active{% endif %}">
+        <i class="fas fa-user"></i>
+        <span>Профиль</span>
+    </a>
+</nav>

@@ -1,0 +1,30 @@
+{% extends "details/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <!-- Main Content -->
+    <main class="main-content my-trees-page" style="margin-bottom: 60px;">
+        <div class="my-trees-container">
+            {% if trees %}
+                <div class="trees-grid">
+                    {% for tree in trees %}
+                    <div class="my-tree-item" onclick="openTreeDetail({{ tree.id }})">
+                            <img src="{{ tree.photo_initial.url }}" alt="Мое дерево {{ forloop.counter }}">
+                            <div class="tree-info">
+                                <span class="tree-type">{{ tree.tree_type.name }}</span>
+                                <span class="tree-date">{{ tree.date_planted|date:"d.m.Y" }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>У вас пока нет посаженных деревьев.</p>
+            {% endif %}
+        </div>
+        
+    </main>
+
+
+    <script src="{% static 'my-trees.js' %}"></script>
+{% endblock %}

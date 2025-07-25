@@ -1,0 +1,76 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌳 Эко Рейтинг - Сажаем деревья вместе</title>
+    <meta name="description" content="Экологическое приложение для отслеживания посадки деревьев и рейтинга участников" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="{% static 'eco-ranking.css' %}">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="header-left">
+                    <i class="fas fa-tree tree-icon"></i>
+                    <span class="co2-text">-CO₂</span>
+                </div>
+                <div class="balance-container">
+                    <i class="fas fa-coins coin-icon"></i>
+                    <span class='balance' id="balance" data-balance="{{ user.balance }}">0</span>
+        
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Title -->
+                <div class="title-section">
+                    <h1 class="title">
+                        🌳 Рейтинг Эко-Героев
+                    </h1>
+                    <p class="subtitle">Топ-10 по посаженным деревьям</p>
+                </div>
+
+                <!-- Ranking List -->
+                <div class="ranking-list" id="rankingList">
+                    <!-- Rankings will be populated by JavaScript -->
+                </div>
+
+                <!-- Current User Position (if not in top 10) -->
+                <div class="current-user-position" id="currentUserPosition" style="display: none;">
+                    <!-- Will be populated by JavaScript if needed -->
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="home-button" id="homeButton">
+                <i class="fas fa-home"></i>
+                <span>На главную</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Вставляем перед подключением JS-файла -->
+<script>
+    const users = JSON.parse('{{ users_data_json|escapejs }}');
+    const currentUserId = {{ current_user_id }};
+</script>
+<script>
+    const homeUrl = "{% url 'home' %}";  // вставь своё имя URL из urls.py
+</script>
+
+
+<script src="{% static 'eco-ranking.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+{% extends "details/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <!-- Main Content -->
+    <main class="main-content tree-detail-page" style="margin-bottom: 60px;">
+        <div class="tree-detail-container">
+            <!-- Tree Image -->
+            <div class="tree-detail-image">
+                <img id="treeImage" src="{{ tree.photo_initial.url }}" alt="Дерево">
+            </div>
+
+            <!-- Tree Information -->
+            <div class="tree-detail-info">
+                <div class="info-card">
+                    <div class="info-row">
+                        <i class="fas fa-tree"></i>
+                        <span class="label">Тип дерева:</span>
+                        <span class="value" id="treeType">{{ tree.tree_type.name }}</span>
+                    </div>
+                    
+                    <div class="info-row">
+                        <i class="fas fa-calendar"></i>
+                        <span class="label">Дата посадки:</span>
+                        <span class="value" id="plantDate">{{ tree.date_planted }}</span>
+                    </div>
+                    
+                    <div class="info-row">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span class="label">Координаты:</span>
+                        <span class="value" id="coordinates">{{ tree.latitude }}, {{ tree.longitude }}</span>
+                    </div>
+                    
+                    <div class="info-row">
+                        <i class="fas fa-coins"></i>
+                        <span class="label">Получено монет:</span>
+                        <span class="value eco-text" id="coinsEarned">{{ tree.tree_type.cost }}</span>
+                    </div>
+                </div>
+
+                <!-- Map Button -->
+                <button class="map-btn" onclick="openMap(this)"
+                        data-lat="{{ tree.latitude }}"
+                        data-lon="{{ tree.longitude }}">
+                    <i class="fas fa-map"></i>
+                    Показать на карте
+                </button>
+
+
+                <!-- Statistics -->
+                <div class="tree-stats">
+                    <h3>Вклад в экологию</h3>
+                    <div class="eco-stats">
+                        <div class="eco-stat">
+                            <span class="eco-value">{{ total_carbon }}</span>
+                            <span class="eco-label">кг CO₂ в год</span>
+                        </div>
+                        <div class="eco-stat">
+                            <span class="eco-value">{{ total_oxygen }}</span>
+                            <span class="eco-label">л O₂ в год</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="action-btn share-btn" onclick="shareTree()">
+                        <i class="fas fa-share"></i>
+                        Поделиться
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    
+    <script src="{% static 'tree-detail.js' %}"></script>
+{% endblock %}

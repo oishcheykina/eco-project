@@ -1,0 +1,176 @@
+{% extends "details/base.html" %}
+{% load static %}
+
+{% block content %}
+<style>
+    .logout-button-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    
+    .logout-button {
+        background-color: #dc3545; /* Красный (Bootstrap danger) */
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    .logout-button:hover {
+        background-color: #c82333; /* Темнее при наведении */
+    }
+</style>
+
+    <!-- Main Content -->
+    <main class="main-content profile-page" style="margin-bottom: 60px;">
+        <div class="profile-container">
+            <h1 class="page-title">{{ user.full_name }}</h1>
+
+<!-- User Avatar -->
+<form id="avatar-form" method="post" enctype="multipart/form-data" style="display: none;">
+    {% csrf_token %}
+    <input type="file" id="avatar-input" name="avatar" accept="image/*">
+</form>
+
+<!-- Аватар -->
+<div class="user-avatar">
+    {% if user.avatar %}
+        <img src="{{ user.avatar.url }}" alt="Аватар пользователя" id="avatar-image" width="150" style="cursor: pointer;">
+    {% else %}
+        <img src="{% static 'img/default_avatar.png' %}" alt="Аватар по умолчанию" id="avatar-image" width="150" style="cursor: pointer;">
+    {% endif %}
+</div>
+
+<script>
+    const avatarImage = document.getElementById('avatar-image');
+    const avatarInput = document.getElementById('avatar-input');
+    const avatarForm = document.getElementById('avatar-form');
+
+    avatarImage.addEventListener('click', () => {
+        avatarInput.click();
+    });
+
+    avatarInput.addEventListener('change', () => {
+        if (avatarInput.files.length > 0) {
+            avatarForm.submit();
+        }
+    });
+</script>
+
+
+
+<!-- User Info -->
+<div class="user-info">
+    <div class="info-item">
+        <i class="fas fa-flag"></i>
+        <span class="label">Страна:</span>
+        <span class="value">{{ user.country }}</span>
+    </div>
+    <div class="info-item">
+        <i class="fas fa-phone"></i>
+        <span class="label">Телефон:</span>
+        <span class="value">{{ user.phone_number }}</span>
+    </div>
+    <div class="info-item">
+        <i class="fas fa-coins"></i>
+        <span class="label">Баланс:</span>
+        <span class="value eco-text">{{ user.balance }} монет</span>
+    </div>
+    <div class="info-item">
+        <i class="fas fa-tree"></i>
+        <span class="label">Посажено деревьев:</span>
+        <span class="value eco-text">{{ trees_count }}</span>
+    </div>
+    
+</div>
+
+
+            <!-- View Trees Button -->
+            <button class="view-trees-btn" onclick="window.location.href='{% url "my_trees" %}'">
+                <i class="fas fa-eye"></i>
+                Посмотреть мои деревья
+            </button>
+
+            <!-- Achievement Section -->
+            <div class="achievements">
+                <h2>Достижения</h2>
+                <div class="achievement-grid">
+                    {% if not achievements %}
+                    <div class="achievement-item no-achievements">
+                        <i class="fas fa-trophy"></i>
+                        <span>Нет достижений</span>
+                    </div>
+                    {% endif %}
+                    {% if 'first_tree' in achievements %}
+                    <div class="achievement-item">
+                        <i class="fas fa-seedling"></i>
+                        <span>Первое дерево</span>
+                    </div>
+                    {% endif %}
+            
+                    {% if 'ten_trees' in achievements %}
+                    <div class="achievement-item">
+                        <i class="fas fa-medal"></i>
+                        <span>10 деревьев</span>
+                    </div>
+                    {% endif %}
+            
+                    {% if 'eco_hero' in achievements %}
+                    <div class="achievement-item">
+                        <i class="fas fa-crown"></i>
+                        <span>Эко-герой</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+
+            <!-- Statistics -->
+            <div class="profile-stats">
+                <h2>Моя статистика</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-value">{{ trees_count }}</span>
+                        <span class="stat-label">Деревьев посажено</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">{{ total_carbon }}</span>
+                        <span class="stat-label">кг CO₂ поглощено</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">{{ user.balance }}</span>
+                        <span class="stat-label">Монет заработано</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">{{ days_in_app }}</span>
+                        <span class="stat-label">Дней в приложении</span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="logout-button-container">
+            <form method="post" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <button type="submit" class="logout-button">Выйти</button>
+            </form>
+        </div>
+          
+          
+    </main>
+
+    <script>
+        document.querySelector('#id_avatar').addEventListener('change', function () {
+            this.form.submit();
+        });
+    </script>
+    
+
+    <!-- Bottom Navigation -->
+{% endblock %}

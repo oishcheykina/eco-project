@@ -1,0 +1,122 @@
+{% extends "details/base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+    <!-- Main Content -->
+    <main class="main-content upload-page" style="margin-bottom: 60px;">
+        <form id="treeUploadForm" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+        
+            <div class="upload-container">
+                <h1 class="page-title">Загрузить фото дерева</h1>
+        
+                <!-- Upload Buttons -->
+                <div class="upload-buttons">
+                    <button class="upload-btn" type="button" onclick="openFileUpload()">
+                        <i class="fas fa-upload"></i>
+                        Загрузить фото
+                    </button>
+                    <button class="upload-btn" type="button" onclick="openCamera()">
+                        <i class="fas fa-camera"></i>
+                        Сфотографировать
+                    </button>
+                </div>
+        
+                <input type="file"
+       id="fileInput"
+       name="image"
+       accept="image/*"
+       capture="environment"
+       style="display: none;"
+       onchange="handleFileSelect(event)">
+
+        
+                <!-- Photo Preview -->
+                <div class="photo-preview" id="photoPreview" style="display: none;">
+                    <img id="previewImage" src="" alt="Предпросмотр">
+                </div>
+        
+                <!-- Coordinates -->
+                <div class="input-group">
+                    <label for="coordinates">Координаты местоположения</label>
+                    <input type="text" id="coordinates" name="coordinates" placeholder="Широта, Долгота" readonly>
+                    <button class="location-btn" type="button" onclick="getLocation()">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Получить координаты
+                    </button>
+                </div>
+        
+                <!-- Photo Example -->
+                <div class="photo-example">
+                    <h3>Пример правильного фото:</h3>
+                    <div class="example-grid">
+                        <div class="example-item">
+                            <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?w=200&h=200&fit=crop" alt="Пример 1">
+                            <span class="example-label good">✓ Хорошо</span>
+                        </div>
+                        <div class="example-item">
+                            <img src="https://images.unsplash.com/photo-1511596266673-dd4b762a39b6?w=200&h=200&fit=crop" alt="Пример 2">
+                            <span class="example-label good">✓ Хорошо</span>
+                        </div>
+                    </div>
+                    <p class="example-text">Фото должно четко показывать дерево целиком</p>
+                    <style>
+                        .rules-link {
+                            display: inline-block;
+                            margin-top: 20px;
+                            width: 50%;
+                            background-color: #00b82d;
+                            color: white;
+                            padding: 10px 20px;
+                            text-align: center;
+                            border: none;
+                            border-radius: 15px;
+                            text-decoration: none;
+                            font-weight: bold;
+                            transition: background-color 0.3s;
+                        }
+                    
+                        .rules-link:hover {
+                            background-color: #00b82d;
+                            text-decoration: none;
+                        }
+                    
+                        .rules-link:visited {
+                            color: white;
+                            text-decoration: none;
+                        }
+                    </style>
+                    
+                    <a href="{% url 'rules' %}" class="rules-link">
+                        <i class="fa-solid fa-list-check"></i> Правила загрузки
+                    </a>
+                    
+                </div>
+        
+                <!-- Tree Type -->
+                <div class="input-group">
+                    <label for="treeType">Тип дерева</label>
+                    <select id="treeType" name="tree_type">
+                        <option value="">Выберите тип дерева</option>
+                        {% for tree in tree_types %}
+                            <option value="{{ tree.name }}">{{ tree.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+        
+                <!-- Submit Button -->
+                <button class="submit-btn" type="submit">
+                    <i class="fas fa-check"></i>
+                    Загрузить дерево
+                </button>
+            </div>
+        </form>
+        
+
+    </main>
+
+
+    <script src="{% static 'upload.js' %}"></script>
+{% endblock %}

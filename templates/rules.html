@@ -1,0 +1,454 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Правила загрузки файлов | -CO2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(180deg, hsl(120, 20%, 98%), hsl(120, 15%, 96%));
+            min-height: 100vh;
+            color: hsl(120, 10%, 15%);
+        }
+
+        .tree-icon {
+            width: 32px;
+            height: 32px;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            max-width: 1024px;
+            margin: 0 auto;
+            padding: 32px 16px;
+        }
+
+        .content {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+
+        .page-title {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            font-weight: bold;
+            margin-bottom: 16px;
+            color: hsl(120, 10%, 15%);
+        }
+
+        .page-description {
+            font-size: 18px;
+            color: hsl(120, 8%, 45%);
+        }
+
+        .grid {
+            display: grid;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 20px -4px hsl(123, 95%, 44%, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 30px -10px hsl(123, 95%, 44%, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .success-title {
+            color: hsl(140, 85%, 45%);
+        }
+
+        .error-title {
+            color: hsl(0, 84%, 60%);
+        }
+
+        .icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .success-icon {
+            color: hsl(140, 85%, 45%);
+        }
+
+        .error-icon {
+            color: hsl(0, 84%, 60%);
+        }
+
+        .format-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            background: hsl(123, 60%, 88%, 0.5);
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .format-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .format-name {
+            font-weight: 500;
+        }
+
+        .badge {
+            background: hsl(120, 15%, 92%);
+            color: hsl(120, 10%, 25%);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .prohibited-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+        }
+
+        .prohibited-text {
+            font-size: 14px;
+            color: hsl(120, 8%, 45%);
+        }
+
+        .eco-card {
+            background: linear-gradient(135deg, hsl(123, 95%, 44%), hsl(123, 80%, 60%));
+            color: white;
+            grid-column: 1 / -1;
+        }
+
+        .eco-tips {
+            display: grid;
+            gap: 12px;
+        }
+
+        @media (min-width: 768px) {
+            .eco-tips {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .eco-tip {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .eco-tip-text {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 20px -4px hsl(123, 95%, 44%, 0.2);
+            margin-bottom: 32px;
+        }
+
+        .info-list {
+            list-style: none;
+            space-y: 8px;
+        }
+
+        .info-list li {
+            color: hsl(120, 8%, 45%);
+            margin-bottom: 8px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            background: hsl(123, 95%, 44%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 16px;
+            box-shadow: 0 10px 30px -10px hsl(123, 95%, 44%, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 40px hsl(123, 80%, 60%, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, #4adf7a, #00df2d);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(74, 223, 122, 0.2);
+            padding: 0;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tree-icon {
+            font-size: 24px;
+            color: white;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        .co2-text {
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .balance-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 6px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .coin-icon {
+            font-size: 20px;
+            color: #f5d216;
+            animation: bounce 2s ease-in-out infinite;
+        }
+        
+        .balance {
+            font-weight: bold;
+            color: #00b82d;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    {% include 'details/header.html' %}
+
+    <div class="container">
+        <div class="content">
+            <div class="page-header" style='margin-top: 40px; margin-bottom: 15px;'>
+                <h1 class="page-title">Правила загрузки файлов</h1>
+                <p class="page-description">
+                    Соблюдайте экологичность и безопасность при загрузке файлов
+                </p>
+            </div>
+
+            <div class="grid">
+                <!-- Разрешенные форматы -->
+                <div class="card">
+                    <div class="card-header">
+                        <svg class="icon success-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                        <h2 class="card-title success-title">Разрешенные форматы</h2>
+                    </div>
+                    <div>
+                        <div class="format-item">
+                            <div class="format-info">
+                                <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                                </svg>
+                                <span class="format-name">PDF</span>
+                            </div>
+                            <span class="badge">до 10 МБ</span>
+                        </div>
+                        <div class="format-item">
+                            <div class="format-info">
+                                <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                                </svg>
+                                <span class="format-name">DOCX</span>
+                            </div>
+                            <span class="badge">до 5 МБ</span>
+                        </div>
+                        <div class="format-item">
+                            <div class="format-info">
+                                <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                                </svg>
+                                <span class="format-name">TXT</span>
+                            </div>
+                            <span class="badge">до 1 МБ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Запрещенные материалы -->
+                <div class="card">
+                    <div class="card-header">
+                        <svg class="icon error-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                        </svg>
+                        <h2 class="card-title error-title">Запрещено</h2>
+                    </div>
+                    <div>
+                        <div class="prohibited-item">
+                            <svg class="icon error-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                            </svg>
+                            <span class="prohibited-text">Файлы с вирусами или вредоносным ПО</span>
+                        </div>
+                        <div class="prohibited-item">
+                            <svg class="icon error-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                            </svg>
+                            <span class="prohibited-text">Материалы, нарушающие авторские права</span>
+                        </div>
+                        <div class="prohibited-item">
+                            <svg class="icon error-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                            </svg>
+                            <span class="prohibited-text">Контент, наносящий вред экологии</span>
+                        </div>
+                        <div class="prohibited-item">
+                            <svg class="icon error-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                            </svg>
+                            <span class="prohibited-text">Файлы размером более 10 МБ</span>
+                        </div>
+                        <div class="prohibited-item">
+                            <svg class="icon error-icon" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                            </svg>
+                            <span class="prohibited-text">Исполняемые файлы (.exe, .bat, .sh)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Эко-советы -->
+            <div class="card eco-card" style='margin-bottom: 25px'>
+                <div class="card-header">
+                    <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+                    </svg>
+                    <h2 class="card-title">Эко-советы для загрузки</h2>
+                </div>
+                <div class="eco-tips">
+                    <div class="eco-tip">
+                        <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                        <span class="eco-tip-text">Сжимайте файлы для уменьшения размера</span>
+                    </div>
+                    <div class="eco-tip">
+                        <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                        <span class="eco-tip-text">Используйте экологичные форматы</span>
+                    </div>
+                    <div class="eco-tip">
+                        <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                        <span class="eco-tip-text">Удаляйте неиспользуемые файлы</span>
+                    </div>
+                    <div class="eco-tip">
+                        <svg class="icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                        </svg>
+                        <span class="eco-tip-text">Оптимизируйте изображения</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Дополнительная информация -->
+            <div class="info-card">
+                <div class="card-header">
+                    <h2 class="card-title">Важная информация</h2>
+                </div>
+                <ul class="info-list">
+                    <li>• Все файлы проходят автоматическую проверку на вирусы</li>
+                    <li>• Загруженные файлы хранятся в экологически чистых дата-центрах</li>
+                    <li>• Максимальное время хранения файлов: 30 дней</li>
+                    <li>• При нарушении правил файл будет автоматически удален</li>
+                    <li>• Мы заботимся о цифровой экологии и минимизируем углеродный след</li>
+                </ul>
+            </div>
+
+            <div class="text-center">
+                <a href="/" class="btn">
+                    Вернуться на главную
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'script.js' %}"></script>
+</body>
+</html>

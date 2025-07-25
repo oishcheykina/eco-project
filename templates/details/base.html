@@ -1,0 +1,23 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Эко Приложение</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    {% include "details/header.html" %} 
+
+    {% block content %}
+
+    {% endblock %}
+
+    {% include "details/bottom-nav.html" %}
+
+<script src="{% static 'script.js' %}"></script>
+</body>
+</html>

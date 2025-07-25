@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация | -CO2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(180deg, #f8fffe, #f0f9f0);
+            min-height: 100vh;
+            color: #1a4a1a;
+        }
+
+        .header {
+            background: #00df2d;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 223, 45, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .tree-icon {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 80px);
+            padding: 1rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 20px rgba(0, 223, 45, 0.1);
+            border: 1px solid rgba(0, 223, 45, 0.1);
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1a4a1a;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-description {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #1a4a1a;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            color: #666;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 12px 12px 40px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #00df2d;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(0, 223, 45, 0.1);
+        }
+
+        .password-input {
+            padding-right: 40px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #666;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #00df2d, #00b823);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(0, 223, 45, 0.3);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .login-link a {
+            color: #00df2d;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .login-link a:hover {
+            color: #00b823;
+        }
+
+        .error-message {
+            color: #dc2626;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 1.5rem;
+                margin: 0.5rem;
+            }
+            
+            .card-title {
+                font-size: 1.25rem;
+            }
+        }
+        .code-inputs {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .code-input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .code-input:focus {
+            outline: none;
+            border-color: #00df2d;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(0, 223, 45, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <svg class="tree-icon" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9l-5 4.87L18.18 22 12 18.77 5.82 22 7 13.87 2 9l6.91-.74L12 2z"/>
+                <path d="M12 22v-6l-3-3h6l-3 3z"/>
+            </svg>
+            -CO2
+        </div>
+    </header>
+
+    <div class="container">
+        {% if step == 1 %}
+        <div class="card">
+            <div class="card-header">
+                <h1 class="card-title">Регистрация</h1>
+                <p class="card-description">Создайте новый аккаунт</p>
+            </div>
+
+            <form id="registerForm" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="form-label" for="name">Имя</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            class="form-input"
+                            placeholder="Ваше имя"
+                            name='name'
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="country">Страна</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        <select id="country" name="country" class="form-input" required>
+                            <option value="">Выберите страну</option>
+                            {% for code, name in country_list %}
+                                <option value="{{ name }}">{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="name">Номер</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                        </svg>
+                        <input 
+                            type="text" 
+                            id="phone_number" 
+                            class="form-input"
+                            placeholder="Номер телефона"
+                            name='phone_number'
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="email">Email</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            class="form-input"
+                            placeholder="your@email.com"
+                            name='email'
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="password">Пароль</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                        </svg>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            class="form-input password-input"
+                            placeholder="Создайте пароль"
+                            name='password'
+                            required
+                        >
+                        <button type="button" class="password-toggle" onclick="togglePassword('password', 'eyeIcon1')">
+                            <svg id="eyeIcon1" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="confirmPassword">Подтвердите пароль</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                        </svg>
+                        <input 
+                            type="password" 
+                            id="confirmPassword" 
+                            class="form-input password-input"
+                            placeholder="Повторите пароль"
+                            name='confirmPassword'
+                            required
+                        >
+                        <button type="button" class="password-toggle" onclick="togglePassword('confirmPassword', 'eyeIcon2')">
+                            <svg id="eyeIcon2" width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="passwordError" class="error-message">Пароли не совпадают</div>
+                </div>
+
+                <button type="submit" class="submit-btn">Зарегистрироваться</button>
+            </form>
+
+            <div class="login-link">
+                Уже есть аккаунт? <a href="{% url 'login' %}">Войти</a>
+            </div>
+        </div>
+        {% endif %}
+        {% if step == 2 %}
+<div class="card">
+  <div class="card-header">
+    <h1 class="card-title">Подтвердите Email</h1>
+    <p class="card-description">Мы отправили 4-значный код на <strong>{{ email }}</strong></p>
+  </div>
+
+  <form method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="step" value="2">
+
+    <div class="form-group">
+      <label class="form-label">Код подтверждения</label>
+      <div class="code-inputs">
+        <input type="text" class="code-input" maxlength="1" name="code1" required>
+        <input type="text" class="code-input" maxlength="1" name="code2" required>
+        <input type="text" class="code-input" maxlength="1" name="code3" required>
+        <input type="text" class="code-input" maxlength="1" name="code4" required>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn">Подтвердить</button>
+  </form>
+</div>
+{% endif %}
+
+
+    </div>
+
+    <script>
+        let currentStep = 1;
+        let userEmail = '';
+    
+        function goToStep(step) {
+            // Скрыть все шаги
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            // Показать нужный шаг
+            document.getElementById(`step${step}`).classList.add('active');
+            currentStep = step;
+        }
+    
+        function togglePassword(inputId, iconId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(iconId);
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.innerHTML = '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94L17.94 17.94zM9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19L9.9 4.24z"/><line x1="1" y1="1" x2="23" y2="23"/>';
+            } else {
+                input.type = 'password';
+                icon.innerHTML = '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
+            }
+        }
+    
+        document.getElementById('registerForm')?.addEventListener('submit', function(e) {
+            const name = document.getElementById('name')?.value;
+            const email = document.getElementById('email')?.value;
+            const password = document.getElementById('password')?.value;
+            const confirmPassword = document.getElementById('confirmPassword')?.value;
+            const errorDiv = document.getElementById('passwordError');
+    
+            if (password !== confirmPassword) {
+                errorDiv.style.display = 'block';
+                e.preventDefault();
+                return;
+            } else {
+                errorDiv.style.display = 'none';
+            }
+    
+            console.log('Register:', { name, email, password });
+        });
+    
+        // Проверка паролей в реальном времени
+        document.getElementById('confirmPassword')?.addEventListener('input', function() {
+            const password = document.getElementById('password')?.value;
+            const confirmPassword = this.value;
+            const errorDiv = document.getElementById('passwordError');
+    
+            if (confirmPassword && password !== confirmPassword) {
+                errorDiv.style.display = 'block';
+            } else {
+                errorDiv.style.display = 'none';
+            }
+        });
+    
+        // Автоматический переход между полями кода
+        document.querySelectorAll('.code-input').forEach((input, index, inputs) => {
+            input.addEventListener('input', function() {
+                if (this.value.length === 1 && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+    
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Backspace' && this.value === '' && index > 0) {
+                    inputs[index - 1].focus();
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>

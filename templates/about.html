@@ -1,0 +1,73 @@
+{% extends "details/base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <!-- Main Content -->
+    <main class="main-content about-page" style="margin-bottom: 60px;">
+        <div class="about-container">
+            <h1 class="page-title">О проекте</h1>
+            
+            <!-- Project Images -->
+            <div class="project-images">
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1571595019501-3e4ef30f8e88?w=400&h=300&fit=crop" alt="Экология">
+                </div>
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&h=300&fit=crop" alt="Деревья">
+                </div>
+                <div class="project-image">
+                    <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=400&h=300&fit=crop" alt="Природа">
+                </div>
+            </div>
+
+            <!-- Project Description -->
+            <div class="project-description">
+                <h2>Наша миссия</h2>
+                <p>
+                    Мы создали это приложение, чтобы каждый человек мог внести свой вклад в борьбу с изменением климата. 
+                    Сажая деревья и делясь фотографиями, вы не только помогаете планете, но и получаете награды за свои усилия.
+                </p>
+
+                <h2>Как это работает</h2>
+                <div class="how-it-works">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Посадите дерево</h3>
+                            <p>Найдите подходящее место и посадите дерево или найдите уже посаженное</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Сфотографируйте</h3>
+                            <p>Сделайте качественное фото дерева и загрузите его в приложение</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Получите награду</h3>
+                            <p>За каждое загруженное дерево вы получаете экомонеты</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>Наше влияние</h2>
+                <p>
+                    Благодаря нашему сообществу уже посажено более 15,000 деревьев по всему миру. 
+                    Каждое дерево поглощает в среднем 22 кг CO₂ в год, что означает значительное 
+                    положительное влияние на окружающую среду.
+                </p>
+
+                <h2>Присоединяйтесь к нам</h2>
+                <p>
+                    Станьте частью глобального движения за экологию. Каждое дерево имеет значение, 
+                    и каждый ваш вклад приближает нас к более зеленому будущему.
+                </p>
+            </div>
+        </div>
+    </main>
+
+{% endblock %}

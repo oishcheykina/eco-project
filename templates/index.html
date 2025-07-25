@@ -1,0 +1,85 @@
+{% extends "details/base.html" %}
+{% load static %}
+
+{% block content %}
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Добро пожаловать в мир экологии!</h1>
+                <p class="hero-subtitle">Сажайте деревья, получайте монеты</p>
+            </div>
+        </section>
+
+        <!-- Statistics -->
+        <div class="stats-container">
+            <div class="stats-row" style='margin-bottom: 15px;'>
+                <div class="stat-card">
+                    <h3>Посажено деревьев</h3>
+                    <span class="counter" data-target="{{ trees_count }}">{{ trees_count }}</span>
+                </div>
+                <div class="stat-card">
+                    <h3>Ваше Место в рейтинге</h3>
+                    <span class="counter" data-target="{{ current_user_position}}">{{ current_user_position}}</span>
+                </div>
+            </div>
+            <div class="stats-row">
+                <div class="stat-card">
+                    <h3>Участников</h3>
+                    <span class="counter" data-target="{{ users }}">0</span>
+                </div>
+                <div class="stat-card">
+                    <h3>Стран</h3>
+                    <span class="counter" data-target="{{ countries }}">0</span>
+                </div>
+            </div>
+        </div>
+        <div style='display: flex; width: 100%; justify-content: center; align-items: center; margin-bottom: 15px;'>
+            <style>
+                .rules-link {
+                    display: inline-block;
+                    margin-top: 20px;
+                    width: 80%;
+                    background-color: #00df2d;
+                    color: white;
+                    padding: 20px 20px;
+                    text-align: center;
+                    border: none;
+                    border-radius: 15px;
+                    text-decoration: none;
+                    font-size: 1.2em;
+                    font-weight: bold;
+                    transition: background-color 0.3s;
+                }
+            
+                .rules-link:hover {
+                    background-color: #00b82d;
+                    text-decoration: none;
+                }
+            
+                .rules-link:visited {
+                    color: white;
+                    text-decoration: none;
+                }
+            </style>
+            
+            <a href="{% url 'eco_ranking' %}" class="rules-link">
+                <i class="fa-solid fa-list-check"></i> Рейтинг Эко-Героев
+            </a>
+        </div>
+
+        <!-- Tree Gallery -->
+        <section class="tree-gallery">
+            <h2 class="gallery-title">Посаженные деревья</h2>
+            <div class="gallery-grid">
+                {% for tree in trees %}
+                    <div class="tree-item">
+                        <img src="{{ tree.photo_initial.url }}" alt="{{ tree.tree_type }}">
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+{% endblock %}
