@@ -84,8 +84,10 @@ def ranking(request):
 def about(request):
     user = request.user
     balance = user.balance
+    trees_count = Tree.objects.all().count()
     return render(request, 'about.html', {
         'balance': balance,
+        'trees_count': trees_count,
     })
 
 @login_required
